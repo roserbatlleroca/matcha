@@ -1,0 +1,51 @@
+Disagreement Cases (6 total)
+============================================================
+
+Case: c_011  [HP]
+  Evaluations: 5
+  melody  : A               agreement=80.0%  votes=[A, A, A, A, Neither]  n=5
+  harmony : Tie A/B         votes=[A, A, B, B, Neither]  n=5
+  rhythm  : Neither         agreement=80.0%  votes=[A, Neither, Neither, Neither, Neither]  n=5
+  voice   : B               agreement=100.0%  votes=[B, B, B, B, B]  n=5
+  timbre  : B               agreement=100.0%  votes=[B, B, B, B, B]  n=5
+
+Case: c_077  [AS]
+  Evaluations: 5
+  melody  : B               agreement=80.0%  votes=[A, B, B, B, B]  n=5
+  harmony : Tie A/B         votes=[A, A, B, B, Neither]  n=5
+  rhythm  : B               agreement=80.0%  votes=[B, B, B, B, Neither]  n=5
+  voice   : NULL            agreement=—  votes=[—]  n=0
+  timbre  : B               agreement=80.0%  votes=[B, B, B, B, Neither]  n=5
+
+Case: c_095  [AS]
+  Evaluations: 5
+  melody  : Neither         agreement=80.0%  votes=[A, Neither, Neither, Neither, Neither]  n=5
+  harmony : Tie A/B         votes=[A, A, B, B, Neither]  n=5
+  rhythm  : A               agreement=40.0%  votes=[A, A, B, Neither, Neither]  n=5
+  voice   : NULL            agreement=—  votes=[—]  n=0
+  timbre  : A               agreement=40.0%  votes=[A, A, B, Neither, Neither]  n=5
+
+Case: c_234  [HV]
+  Evaluations: 5
+  melody  : Tie A/B         votes=[A, A, B, B, Neither]  n=5
+  harmony : Tie A/B         votes=[A, A, B, B, Neither]  n=5
+  rhythm  : B               agreement=100.0%  votes=[B, B, B, B, B]  n=5
+  voice   : B               agreement=100.0%  votes=[B, B, B, B, B]  n=5
+  timbre  : B               agreement=100.0%  votes=[B, B, B, B, B]  n=5
+
+Case: c_256  [AS]
+  Evaluations: 5
+  melody  : Neither         agreement=60.0%  votes=[A, B, Neither, Neither, Neither]  n=5
+  harmony : Tie A/B         votes=[A, A, B, B, Neither]  n=5
+  rhythm  : A               agreement=60.0%  votes=[A, A, A, B, Neither]  n=5
+  voice   : NULL            agreement=—  votes=[—]  n=0
+  timbre  : Tie A/B         votes=[A, A, B, B, Neither]  n=5
+
+Case: c_277  [AM]
+  Evaluations: 5
+  melody  : Neither         agreement=80.0%  votes=[A, Neither, Neither, Neither, Neither]  n=5
+  harmony : Neither         agreement=60.0%  votes=[A, B, Neither, Neither, Neither]  n=5
+  rhythm  : A               agreement=40.0%  votes=[A, A, B, Neither, Neither]  n=5
+  voice   : Neither         agreement=60.0%  votes=[B, B, Neither, Neither, Neither]  n=5
+  timbre  : Tie A/B         votes=[A, A, B, B, Neither]  n=5
+
