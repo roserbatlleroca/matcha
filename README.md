@@ -11,7 +11,7 @@ Recent advances in generative AI are raising ethical concerns regarding the orig
 
 ### Dataset
 
-MATCHA (Musical Attribute-based Triplet Comparison with Human Annotations) comprises 300 music triplets evaluated by 83 expert music participants as part of a forced-choice perceptual experiment. The dataset contains 1105 perceptual assessments of attribute-based musical similarity across five musical dimensions: melody, harmony, rhythm, voice, and timbre. It includes both human-composed and AI-generated musical excerpts, as summarised in the table below.
+MATCHA (Musical Attribute-based Triplet Comparison with Human Annotations) comprises 300 music triplets evaluated by 83 expert music participants as part of a forced-choice perceptual experiment. Each triplet (case) consists of a **reference** excerpt and two **comparison** samples (**A** and **B**). The dataset contains 1105 perceptual assessments of attribute-based musical similarity across five musical dimensions: melody, harmony, rhythm, voice, and timbre. It includes both human-composed and AI-generated musical excerpts, as summarised in the table below.
 
 | Origin | Section | Source | Cases | w/ Vocals | % |
 |--------|------|--------|------:|-------:|--:|
@@ -35,3 +35,38 @@ MATCHA (Musical Attribute-based Triplet Comparison with Human Annotations) compr
 * [Datasheet](): Complete datasheet for the MATCHA dataset, following [*Datahseet for Dataset*](https://dl.acm.org/doi/10.1145/3458723) template. *Note that we are planning to share the datasheet upon paper acceptance.* 
 * [MiRA Evaluation](mira_eval): Folder containing the raw results from the evaluation with the MiRA tool. 
 
+## Sound Examples
+
+Below are 8 representative cases (two per subset category) with the audio excerpts, the
+majority decision, and the inter-rater agreement statistics.
+
+> **Note:** GitHub does not support inline audio Playback in README files. Click a link
+> below to listen to the excerpt in your browser. *A complementary website with the following examples will be released upon paper acceptance*
+
+### HP
+
+| Case | Reference | Sample A | Sample B | N responses | Melody | Harmony | Rhythm | Voice | Timbre | Overall |
+|------|-----------|----------|----------|:------------:|:------:|:-------:|:------:|:-----:|:------:|:-------:|
+| c_005 | [Play](examples/c_005/c_ref_005.wav) | [Play](examples/c_005/c_sA_005.wav) | [Play](examples/c_005/c_sB_005.wav) | 4 | A (100.0%) | A (100.0%) | A (100.0%) | Neither (100.0%) | A (50.0%) | 90.0% (κ=0.6825) |
+| c_113 | [Play](examples/c_113/c_ref_113.wav) | [Play](examples/c_113/c_sA_113.wav) | [Play](examples/c_113/c_sB_113.wav) | 4 | A (100.0%) | A (50.0%) | A (50.0%) | Neither (50.0%) | B (50.0%) | 60.0% (κ=0.0181) |
+
+### HV
+
+| Case | Reference | Sample A | Sample B | N responses | Melody | Harmony | Rhythm | Voice | Timbre | Overall |
+|------|-----------|----------|----------|:------------:|:------:|:-------:|:------:|:-----:|:------:|:-------:|
+| c_033 | [Play](examples/c_033/c_ref_033.wav) | [Play](examples/c_033/c_sA_033.wav) | [Play](examples/c_033/c_sB_033.wav) | 3 | A (100.0%) | A (100.0%) | A (66.7%) | B (100.0%) | B (66.7%) | 86.7% (κ=0.4915) |
+| c_244 | [Play](examples/c_244/c_ref_244.wav) | [Play](examples/c_244/c_sA_244.wav) | [Play](examples/c_244/c_sB_244.wav) | 4 | Neither (75.0%) | Neither (75.0%) | B (100.0%) | B (50.0%) | B (100.0%) | 80.0% (κ=0.351) |
+
+### AS
+
+| Case | Reference | Sample A | Sample B | N responses | Melody | Harmony | Rhythm | Voice | Timbre | Overall |
+|------|-----------|----------|----------|:------------:|:------:|:-------:|:------:|:-----:|:------:|:-------:|
+| c_087 | [Play](examples/c_087/c_ref_087.wav) | [Play](examples/c_087/c_sA_087.wav) | [Play](examples/c_087/c_sB_087.wav) | 5 | Neither (80.0%) | Neither (60.0%) | Neither (60.0%) | N/A | B (100.0%) | 75.0% (κ=0.2672) |
+| c_256 | [Play](examples/c_256/c_ref_256.wav) | [Play](examples/c_256/c_sA_256.wav) | [Play](examples/c_256/c_sB_256.wav) | 5 | Neither (60.0%) | Tie A/B | A (60.0%) | N/A | Tie A/B | 60.0% (κ=-0.1364) |
+
+### AM
+
+| Case | Reference | Sample A | Sample B | N responses | Melody | Harmony | Rhythm | Voice | Timbre | Overall |
+|------|-----------|----------|----------|:------------:|:------:|:-------:|:------:|:-----:|:------:|:-------:|
+| c_283 | [Play](examples/c_283/c_ref_283.wav) | [Play](examples/c_283/c_sA_283.wav) | [Play](examples/c_283/c_sB_283.wav) | 3 | Neither (100.0%) | A (66.7%) | A (100.0%) | Neither (66.7%) | A (66.7%) | 80.0% (κ=0.2857) |
+| c_298 | [Play](examples/c_298/c_ref_298.wav) | [Play](examples/c_298/c_sA_298.wav) | [Play](examples/c_298/c_sB_298.wav) | 3 | B (100.0%) | B (100.0%) | A (66.7%) | A (100.0%) | A (100.0%) | 93.3% (κ=0.7321) |
