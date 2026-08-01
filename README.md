@@ -4,12 +4,13 @@
 
 This repository is complementary to the paper *On the Human and Computer Aligment of Attribute-Based Music Matches*, currently under-review. It contains main documentation of the MATCHA dataset, as well as complemetary results of the perceptual experiment conducted in this study. We plan to provide additional materials upon paper acceptance, including a complete dataset datasheet. 
 
----
 ### Abstract
 
 Recent advances in generative AI are raising ethical concerns regarding the originality of generated content and the potential replication of training data, with further implications for transparency, attribution, and intellectual property. In music, several computational approaches have been proposed to identify potential replication, using audio-based similarity metrics. Yet, their alignment with human judgments across distinct musical attributes remains underexplored. To address this gap, we conduct a perceptual experiment on music matches, defined as strongly similar musical excerpts. We focus on five musical attributes: melody, harmony, rhythm, voice, and timbre. We design a triplet-based forced-choice task comprising 300 cases, including plagiarism examples, cover songs, and AI-generated music. From this experiment, we introduce the MATCHA (Musical Attribute-based Triplet Comparison with Human Annotations) dataset: a collection of 1105 perceptual assessments of attribute-based music matches from 83 expert participants. Our findings reveal measurable agreement among participants in identifying matches across attributes. We further observe partial alignment between human judgments and computational similarity measures. Overall, this work underscores the importance of domain-specific and perceptually grounded evaluation frameworks for generative AI in creative practice.
 
-### Dataset
+---
+
+## Dataset
 
 MATCHA (Musical Attribute-based Triplet Comparison with Human Annotations) comprises 300 music triplets evaluated by 83 expert music participants as part of a forced-choice perceptual experiment. Each triplet (case) consists of a **reference** excerpt and two **comparison** samples (**A** and **B**). The dataset contains 1105 perceptual assessments of attribute-based musical similarity across five musical dimensions: melody, harmony, rhythm, voice, and timbre. It includes both human-composed and AI-generated musical excerpts, as summarised in the table below.
 
