@@ -1,7 +1,6 @@
-# MATCHA Dataset — Datasheet
+# MATCHA Dataset Datasheet
 
-> **Musical Attribute-based Triplet Comparison with Human Annotations**  
-> Documented in accordance with the *Datasheets for Datasets* framework ([Gebru et al., 2021](https://doi.org/10.1145/3458723)).
+Documented in accordance with the *Datasheets for Datasets* framework ([Gebru et al., 2021](https://doi.org/10.1145/3458723)).
 
 ---
 
