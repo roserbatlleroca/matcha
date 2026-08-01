@@ -33,7 +33,7 @@ MATCHA (Musical Attribute-based Triplet Comparison with Human Annotations) compr
 * [Participants Demographics](annotations/participants_demographics/): Complete analysis of the 83 elegible participants demographics per category (age, gender, location, music level and music role). 
 * [MATACHA dataset](): Link to Zenodo repository with the complete MATCHA dataset, including metadata, annotations and audio samples. Access to the audio samples is restricted to research-purpose only and handled by [Anonymised Institution]. *Note that this link will only be provided upon publication acceptance.*
 * [AS Subset](): Link to 120 samples, generated with Stable Audio Open. *Note that we will only openly relase these samples under CC-BY-NC licensing, complying with Stable Audio License.*
-* [Datasheet](): Complete datasheet for the MATCHA dataset, following [*Datahseet for Dataset*](https://dl.acm.org/doi/10.1145/3458723) template. *Note that we are planning to share the datasheet upon paper acceptance.* 
+* [Datasheet](metadata/MATCHA_datasheet.md): Complete datasheet for the MATCHA dataset, following [*Datahseet for Dataset*](https://dl.acm.org/doi/10.1145/3458723) template. 
 * [MiRA Evaluation](mira_eval): Folder containing the raw results from the evaluation with the MiRA tool. 
 
 ## Stimuli Examples
