@@ -10,12 +10,10 @@ Documented in accordance with the *Datasheets for Datasets* framework ([Gebru et
 The MATCHA dataset was created to support the evaluation of attribute-level musical similarity and assess the alignment between human perception and computational similarity metrics in the context of music replication assessment (e.g., AI-generated music, cover songs, plagiarism). It addresses the gap where human judgments across distinct musical attributes (melody, harmony, rhythm, voice, timbre) remain underexplored.
 
 ### Who created this dataset?
-MATCHA was created by Roser Batlle-Roca<sup>1</sup>, Woosung Choi<sup>2</sup>, Joan Serrà<sup>2</sup>, Fabio Morreale<sup>2</sup>, Wei-Hsiang Liao<sup>2</sup>, Xavier Serra<sup>1</sup>, Emilia Gómez<sup>1,3</sup>, and Yuki Mitsufuji<sup>2,4</sup>
-
-(1) Music Technology Group, Universitat Pompeu Fabra (MTG-UPF); (2) Sony AI; (3) Joint Research Centre, European Commission; (4) Sony Group Corporation
+This dataset was created by the Music Technology Group from Universitat Pompeu Fabra (MTG-UPF), in collaboration with Sony AI.
 
 ### Who funded the creation of the dataset?
-This dataset was developed under [the TRAMUCA project](https://www.upf.edu/web/mtg/ongoing-projects/-/asset_publisher/DneGVrJZ7tmE/content/transparency-in-music-creation-algorithms/maximized), a joint collaboration between the Music Technology Group (Universitat Pompeu Fabra), Sony AI and the European Commission's Joint Research Centre. 
+This dataset was developed under [the TRAMUCA project](https://www.upf.edu/web/mtg/ongoing-projects/-/asset_publisher/DneGVrJZ7tmE/content/transparency-in-music-creation-algorithms/maximized), a joint collaboration between the MTG-UPF, Sony AI and the European Commission's Joint Research Centre. 
 
 ### Any other comments?
 None.
@@ -117,7 +115,7 @@ Annotations were collected over approximately 2 months (March 10 to May 11, 2026
 ### Were any ethical review processes conducted?
 Yes, reviewed and approved by the [Institutional Committee for Ethical Review of Projects](https://www.upf.edu/web/cirep/) from Universitat Pompeu Frabra before relase. 
 
-Does the dataset relate to people?
+### Does the dataset relate to people?
 Yes. 
 
 ### Did you collect the data from the individuals in question directly, or obtain it via third parties?
@@ -196,7 +194,7 @@ Yes, publicly available to the research community.
 | **Stable Audio (AS) Audio Files** | Zenodo | CC-BY-NC 4.0 *(upon paper acceptance)* |
 
 
-When will the dataset be distributed?}
+### When will the dataset be distributed?
 Complete public release following paper acceptance.
 
 ### Will the dataset be distributed under a copyright or IP license, and/or Terms of Use?
