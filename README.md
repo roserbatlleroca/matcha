@@ -2,10 +2,11 @@
 
 # MATCHA: Music Attribute-based Triplet Comparison with Human Annotations
 
-**Roser Batlle-Roca**<sup>1</sup>, **Woosung Choi**<sup>2</sup>, **Joan Serrà**<sup>2</sup>, **Fabio Morreale**<sup>2</sup>, **Wei-Hsiang Liao**<sup>2</sup>,
+**Roser Batlle-Roca**<sup>1</sup>, **Woosung Choi**<sup>2</sup>, **Joan Serrà**<sup>2</sup>, **Fabio Morreale**<sup>2</sup>,<br> **Wei-Hsiang Liao**<sup>2</sup>,
 **Xavier Serra**<sup>1</sup>, **Emilia Gómez**<sup>1,3</sup>, **Yuki Mitsufuji**<sup>2,4</sup>
 
-<sup>1</sup>Music Technology Group, Universitat Pompeu Fabra · <sup>2</sup>Sony AI · <sup>3</sup>Joint Research Centre, European Commission ·
+<sup>1</sup>Music Technology Group, Universitat Pompeu Fabra · <sup>2</sup>Sony AI ·<br> 
+<sup>3</sup>Joint Research Centre, European Commission ·
 <sup>4</sup>Sony Group Corporation
 
 
