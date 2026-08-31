@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATCHA</title>
+<meta name="description" content="MATCHA: a perceptual dataset of 1105 human annotations comparing musical matches across melody, harmony, rhythm, voice and timbre.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+    --navy: #003366;
+    --navy-hover: #002347;
+    --bg: #ebe8e8;
+    --card: #ffffff;
+    --border: #d9dbde;
+    --slate: #607d8b; 
+    --tie: #8B0000;
+    --pending: #8B0000;
+    --text: #1c1c1c;
+    --muted: #5a5f66;
+    --display-font: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --body-font: 'Open Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    font-family: var(--body-font);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  a { color: var(--navy); }
+
+  .wrap-text   { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+  .wrap-wide   { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Top nav ---------- */
+  nav.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(235, 232, 232, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .topbar-mark {
+    font-family: var(--display-font);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--navy);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .topbar-links { display: flex; gap: 28px; }
+  .topbar-links a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+  .topbar-links a:hover { color: var(--navy); }
+
+  /* ---------- Hero ---------- */
+  header.hero {
+    position: relative;
+    padding: 40px 24px 64px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-waveform {
+    position: absolute;
+    left: 0; right: 0; bottom: 18px;
+    height: 90px;
+    opacity: 0.16;
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero h1 {
+    font-family: var(--display-font);
+    font-weight: 700;
+    font-size: clamp(2.6rem, 6vw, 4.2rem);
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+    color: var(--navy);
+  }
+  .hero p.tagline {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 850px;
+    margin: 0 auto 34px;
+  }
+  .authors {
+    max-width: 850px;
+    margin: 0 auto 6px;
+    font-size: 1rem;
+    color: var(--text);
+  }
+  .authors .author { white-space: nowrap; }
+  .affiliations {
+    font-size: 0.85rem;
+    color: var(--text);
+    max-width: 850px;
+    margin: 10px auto 34px;
+  }
+  .affiliations sup { margin-right: 3px; }
+  .authors sup { color: var(--text); }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 8px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 2px solid var(--navy);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 1px rgba(0,0,0,0.15); }
+  .btn-solid { background: var(--navy); color: white; }
+  .btn-solid:hover { background: var(--navy-hover); }
+  .btn-outline { background: white; color: var(--navy); }
+  .btn-pending {
+    background: #f7f6f6;
+    color: #aaa;
+    border-color: #aaa;
+    cursor: default;
+    opacity: 0.85;
+    border-style: dashed;
+  }
+  .btn-pending:hover { transform: none; box-shadow: none; }
+  .status-pause {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+  }
+  .status-pause span {
+    width: 3px;
+    height: 11px;
+    border-radius: 1px;
+    background: #aaa;
+    display: inline-block;
+  }
+
+  /* ---------- Section shell ---------- */
+  section { padding: 34px 24px; }
+  section[id] {
+    scroll-margin-top: 50px;
+  }
+  section.alt { 
+    background: var(--card); 
+    border-top: 1px solid var(--border); 
+    border-bottom: 1px solid var(--border); }
+  
+  h2.section-title {
+    font-family: var(--display-font);
+    font-weight: 700;
+    font-size: 1.9rem;
+    color: var(--navy);
+    margin: 0 0 28px;
+  }
+
+  
+
+  /* ---------- Abstract ---------- */
+  .abstract p { font-size: 1.03rem; color: #2a2a2a; }
+  .placeholder-note {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 8px 14px;
+    border: 1px dashed var(--slate);
+    border-radius: 5px;
+    font-size: 0.82rem;
+    color: var(--slate);
+    background: #f6f7f8;
+  }
+
+  /* ---------- Dataset stats ---------- */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 18px;
+    text-align: center;
+  }
+  .stat-card .num {
+    font-family: var(--display-font);
+    font-weight: 700;
+    font-size: 2.1rem;
+    color: var(--navy);
+    display: block;
+  }
+  .stat-card .lbl { font-size: 0.85rem; color: var(--muted); }
+
+  table.dataset-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  table.dataset-table th, table.dataset-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+  table.dataset-table th {
+    background: var(--navy);
+    color: white;
+    font-weight: 600;
+  }
+  table.dataset-table tr:last-child td { border-bottom: none; }
+  table.dataset-table td.num, table.dataset-table th.num { text-align: right; }
+  table.dataset-table a { color: var(--navy); }
+
+  /* ---------- Examples ---------- */
+  .tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    flex: 1;
+    min-width: 130px;
+    padding: 12px;
+    border: 2px solid var(--border);
+    border-radius: 5px;
+    background: white;
+    color: var(--muted);
+    font-weight: 600;
+    font-family: var(--body-font);
+    font-size: 0.92rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { border-color: var(--slate); color: var(--text); }
+  .tab-btn.active {
+    background: var(--navy);
+    color: white;
+    border-color: var(--navy);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+  .tab-desc { color: var(--muted); font-size: 0.92rem; margin: -8px 0 26px; }
+
+  .case-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 26px;
+    margin-bottom: 22px;
+  }
+  .case-card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .case-id {
+    font-family: var(--display-font);
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 1.1rem;
+  }
+  .case-overall { font-size: 0.85rem; color: var(--muted); }
+  .case-overall strong { color: var(--text); }
+
+  .reference-container {
+    padding: 16px;
+    border-radius: 10px;
+    border: 3px solid var(--navy);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .reference-container .rc-label {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--navy);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .samples-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+  }
+  .sample-box {
+    flex: 1;
+    min-width: 220px;
+    background: #fafafa;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+  .sample-box .sb-label {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--slate);
+    margin-bottom: 8px;
+    display: block;
+  }
+  audio { width: 100%; height: 34px; }
+
+  .attr-grid {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    row-gap: 10px;
+    align-items: center;
+  }
+  .attr-name { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+  .attr-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border: 1.5px solid var(--border);
+    color: var(--muted);
+    background: white;
+  }
+  .pill.win-a { background: var(--navy); color: white; border-color: var(--navy); }
+  .pill.win-b { background: var(--slate); color: white; border-color: var(--slate); }
+  .pill.win-neither { background: white; color: var(--muted); border-color: var(--muted); }
+  .pill.win-tie { background: white; color: var(--tie); border-color: var(--tie);}
+  .pill.win-na { background: #f2f2f2; color: #aaa; border-style: dashed; }
+
+  /* ---------- Materials ---------- */
+  .materials-list { list-style: none; padding: 0; margin: 0; }
+  .materials-list li {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .materials-list li:last-child { border-bottom: none; }
+  .materials-list .m-name { font-weight: 700; }
+  .materials-list .m-desc { color: var(--muted); font-size: 0.88rem; display: block; margin-top: 2px; }
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .tag-available { background: #e7edf3; color: var(--navy); }
+  .tag-pending { background: #f6e9e9; color: var(--pending); }
+
+  /* ---------- Citation ---------- */
+  .citation-block {
+    background: #0e2340;
+    color: #dbe6f0;
+    padding: 24px;
+    border-radius: 10px;
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 0.85rem;
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 1.7;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 10px 24px 20px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--navy); }
+
+  @media (max-width: 850px) {
+    .stat-row { grid-template-columns: repeat(2, 1fr); }
+    .attr-grid { grid-template-columns: 1fr; row-gap: 6px; }
+    .attr-name { margin-top: 6px; }
+    table.dataset-table { font-size: 0.8rem; }
+    table.dataset-table th, table.dataset-table td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="topbar-inner">
+    <a class="topbar-mark" href="#top">MATCHA</a>
+    <div class="topbar-links">
+      <a href="#abstract">Abstract</a>
+      <a href="#dataset">Dataset</a>
+      <a href="#examples">Examples</a>
+      <a href="#materials">Materials</a>
+      <a href="#citation">Citation</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <h1>MATCHA</h1>
+    <p class="tagline"><strong><em>Musical Attribute-based Triplet Comparison with Human Annotations:</em></strong><br>
+      A perceptual dataset for evaluating attribute-based music similarity against human judgment.</p>
+    
+    <p class="authors">
+      <span class="author">Roser Batlle-Roca<sup>1</sup></span>, <span class="author">Woosung Choi<sup>2</sup></span>, <span class="author">Joan Serrà<sup>2</sup></span>, <span class="author">Fabio Morreale<sup>2</sup></span>,<br><span class="author">Wei-Hsiang Liao<sup>2</sup></span>, <span class="author">Xavier Serra<sup>1</sup></span>, <span class="author">Emilia Gómez<sup>1,3</sup></span>, <span class="author">Yuki Mitsufuji<sup>2,4</sup></span>
+    </p>
+    <p class="affiliations">
+      <sup>1</sup>Music Technology Group, Universitat Pompeu Fabra &nbsp;·&nbsp;
+      <sup>2</sup>Sony AI &nbsp;·&nbsp;<br>
+      <sup>3</sup>Joint Research Centre, European Commission &nbsp;·&nbsp;
+      <sup>4</sup>Sony Group Corporation
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn btn-outline" href="#">Read the paper</a>
+      <a class="btn btn-outline" href="https://github.com/roserbatlleroca/matcha">GitHub repo</a>
+      <span class="btn btn-pending"><span class="status-pause"><span></span><span></span></span>Dataset on Zenodo</span>
+      <!-- <span class="btn btn-pending">SAO subset on Zenodo</span> -->
+    </div>
+  </div>
+</header>
+
+<section id="abstract">
+  <div class="wrap-text">
+    <h2 class="section-title">Abstract</h2>
+    <div class="abstract">
+      <p>Recent advances in generative AI are raising ethical concerns regarding the originality of generated content and the potential replication of training data, with further implications for transparency, attribution, and intellectual property. In music, several computational approaches have been proposed to identify potential replication, using audio-based similarity metrics. Yet, their alignment with human judgments across distinct musical attributes remains underexplored.</p>
+      <p>To address this gap, we conduct a perceptual experiment on music matches, defined as strongly similar musical excerpts. We focus on five musical attributes: melody, harmony, rhythm, voice, and timbre. We design a triplet-based forced-choice task comprising 300 cases, including plagiarism examples, cover songs, and AI-generated music. From this experiment, we introduce the MATCHA dataset: a collection of 1105 perceptual assessments of attribute-based music matches from 83 expert participants.</p>
+      <p>Our findings reveal measurable agreement among participants in identifying matches across attributes. We further observe partial alignment between human judgments and computational similarity measures. Overall, this work underscores the importance of domain-specific and perceptually grounded evaluation frameworks for generative AI in creative practice.</p>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="dataset">
+  <div class="wrap-wide">
+    <h2 class="section-title">Dataset</h2>
+    <div class="stat-row">
+      <div class="stat-card"><span class="num">300</span><span class="lbl">triplet cases</span></div>
+      <div class="stat-card"><span class="num">1105</span><span class="lbl">perceptual annotations</span></div>
+      <div class="stat-card"><span class="num">83</span><span class="lbl">expert participants</span></div>
+      <div class="stat-card"><span class="num">5</span><span class="lbl">musical attributes</span></div>
+    </div>
+
+    <table class="dataset-table">
+      <thead>
+        <tr>
+          <th>Origin</th>
+          <th>Section</th>
+          <th>Source</th>
+          <th class="num">Cases</th>
+          <th class="num">w/ Vocals</th>
+          <th class="num">%</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="2">Human</td>
+          <td>Human-Plagiarism (HP)</td>
+          <td><a href="https://github.com/Mippia/Music-Plagiarism-Detection" target="_blank" rel="noopener">SMP Dataset</a></td>
+          <td class="num">75</td><td class="num">61</td><td class="num">25</td>
+        </tr>
+        <tr>
+          <td>Human-Version (HV)</td>
+          <td><a href="https://github.com/MTG/discogs-vi-dataset" target="_blank" rel="noopener">Discogs-VI</a></td>
+          <td class="num">75</td><td class="num">63</td><td class="num">25</td>
+        </tr>
+        <tr>
+          <td rowspan="2">AI</td>
+          <td>AI-SAO (AS)</td>
+          <td><a href="https://huggingface.co/stabilityai/stable-audio-open-1.0" target="_blank" rel="noopener">Stable Audio Open</a></td>
+          <td class="num">120</td><td class="num">0</td><td class="num">40</td>
+        </tr>
+        <tr>
+          <td>AI-Media (AM)</td>
+          <td>Media articles [<a href="https://www.musicbusinessworldwide.com/suno-is-a-music-ai-company-aiming-to-generate-120-billion-per-year-newton-rex/">1</a>,<a href="https://www.gema.de/en/news/ai-and-music/ai-lawsuit/audio-samples-suno">2</a>]</td>
+          <td class="num">30</td><td class="num">27</td><td class="num">10</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="tab-desc" style="margin-top:16px;">Stimuli distribution across reference sources, by origin, section, source, number of cases, number of cases containing vocals, and overall percentage.</p>
+  </div>
+</section>
+
+<section id="examples">
+  <div class="wrap-wide">
+    <h2 class="section-title">Listen to example cases</h2>
+    <p class="tab-desc">Two representative cases per category, with the majority decision and inter-rater agreement for each attribute. N is the number of responses received for that case (minimum 3).</p>
+
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" data-tab="hp">Human-Plagiarism</button>
+      <button class="tab-btn" data-tab="hv">Human-Version</button>
+      <button class="tab-btn" data-tab="as">AI-Stable Audio</button>
+      <button class="tab-btn" data-tab="am">AI-Media</button>
+    </div>
+
+    <!-- HP -->
+    <div class="tab-panel active" id="panel-hp">
+      <div class="case-card">
+        <div class="case-card-head">
+          <span class="case-id">c_005</span>
+          <span class="case-overall">Overall agreement: <strong>90.0%</strong> (&kappa; = 0.6825)</span>
+        </div>
+        <div class="reference-container">
+          <span class="rc-label">Reference</span>
+          <audio controls src="../examples/c_005/c_ref_005.wav"></audio>
+        </div>
+        <div class="samples-row">
+          <div class="sample-box"><span class="sb-label">Sample A</span><audio controls src="../examples/c_005/c_sA_005.wav"></audio></div>
+          <div class="sample-box"><span class="sb-label">Sample B</span><audio controls src="../examples/c_005/c_sB_005.wav"></audio></div>
+        </div>
+        <div class="attr-grid">
+          <span class="attr-name">Melody</span><div class="attr-pills"><span class="pill win-a">A &#183; 100.0%</span></div>
+          <span class="attr-name">Harmony</span><div class="attr-pills"><span class="pill win-a">A &#183; 100.0%</span></div>
+          <span class="attr-name">Rhythm</span><div class="attr-pills"><span class="pill win-a">A &#183; 100.0%</span></div>
+          <span class="attr-name">Voice</span><div class="attr-pills"><span class="pill win-neither">Neither &#183; 100.0%</span></div>
+          <span class="attr-name">Timbre</span><div class="attr-pills"><span class="pill win-a">A &#183; 50.0%</span></div>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-card-head">
+          <span class="case-id">c_113</span>
+          <span class="case-overall">Overall agreement: <strong>60.0%</strong> (&kappa; = 0.0181)</span>
+        </div>
+        <div class="reference-container">
+          <span class="rc-label">Reference</span>
+          <audio controls src="../examples/c_113/c_ref_113.wav"></audio>
+        </div>
+        <div class="samples-row">
+          <div class="sample-box"><span class="sb-label">Sample A</span><audio controls src="../examples/c_113/c_sA_113.wav"></audio></div>
+          <div class="sample-box"><span class="sb-label">Sample B</span><audio controls src="../examples/c_113/c_sB_113.wav"></audio></div>
+        </div>
+        <div class="attr-grid">
+          <span class="attr-name">Melody</span><div class="attr-pills"><span class="pill win-a">A &#183; 100.0%</span></div>
+          <span class="attr-name">Harmony</span><div class="attr-pills"><span class="pill win-a">A &#183; 50.0%</span></div>
+          <span class="attr-name">Rhythm</span><div class="attr-pills"><span class="pill win-a">A &#183; 50.0%</span></div>
+          <span class="attr-name">Voice</span><div class="attr-pills"><span class="pill win-neither">Neither &#183; 50.0%</span></div>
+          <span class="attr-name">Timbre</span><div class="attr-pills"><span class="pill win-b">B &#183; 50.0%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HV -->
+    <div class="tab-panel" id="panel-hv">
+      <div class="case-card">
+        <div class="case-card-head">
+          <span class="case-id">c_033</span>
+          <span class="case-overall">Overall agreement: <strong>86.7%</strong> (&kappa; = 0.4915)</span>
+        </div>
+        <div class="reference-container">
+          <span class="rc-label">Reference</span>
+          <audio controls src="../examples/c_033/c_ref_033.wav"></audio>
+        </div>
+        <div class="samples-row">
+          <div class="sample-box"><span class="sb-label">Sample A</span><audio controls src="../examples/c_033/c_sA_033.wav"></audio></div>
+          <div class="sample-box"><span class="sb-label">Sample B</span><audio controls src="../examples/c_033/c_sB_033.wav"></audio></div>
+        </div>
+        <div class="attr-grid">
+          <span class="attr-name">Melody</span><div class="attr-pills"><span class="pill win-a">A &#183; 100.0%</span></div>
+          <span class="attr-name">Harmony</span><div class="attr-pills"><span class="pill win-a">A &#183; 100.0%</span></div>
+          <span class="attr-name">Rhythm</span><div class="attr-pills"><span class="pill win-a">A &#183; 66.7%</span></div>
+          <span class="attr-name">Voice</span><div class="attr-pills"><span class="pill win-b">B &#183; 100.0%</span></div>
+          <span class="attr-name">Timbre</span><div class="attr-pills"><span class="pill win-b">B &#183; 66.7%</span></div>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-card-head">
+          <span class="case-id">c_244</span>
+          <span class="case-overall">Overall agreement: <strong>80.0%</strong> (&kappa; = 0.351)</span>
+        </div>
+        <div class="reference-container">
+          <span class="rc-label">Reference</span>
+          <audio controls src="../examples/c_244/c_ref_244.wav"></audio>
+        </div>
+        <div class="samples-row">
+          <div class="sample-box"><span class="sb-label">Sample A</span><audio controls src="../examples/c_244/c_sA_244.wav"></audio></div>
+          <div class="sample-box"><span class="sb-label">Sample B</span><audio controls src="../examples/c_244/c_sB_244.wav"></audio></div>
+        </div>
+        <div class="attr-grid">
+          <span class="attr-name">Melody</span><div class="attr-pills"><span class="pill win-neither">Neither &#183; 75.0%</span></div>
+          <span class="attr-name">Harmony</span><div class="attr-pills"><span class="pill win-neither">Neither &#183; 75.0%</span></div>
+          <span class="attr-name">Rhythm</span><div class="attr-pills"><span class="pill win-b">B &#183; 100.0%</span></div>
+          <span class="attr-name">Voice</span><div class="attr-pills"><span class="pill win-b">B &#183; 50.0%</span></div>
+          <span class="attr-name">Timbre</span><div class="attr-pills"><span class="pill win-b">B &#183; 100.0%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AS -->
+    <div class="tab-panel" id="panel-as">
+      <div class="case-card">
+        <div class="case-card-head">
+          <span class="case-id">c_087</span>
+          <span class="case-overall">Overall agreement: <strong>75.0%</strong> (&kappa; = 0.2672)</span>
+        </div>
+        <div class="reference-container">
+          <span class="rc-label">Reference</span>
+          <audio controls src="../examples/c_087/c_ref_087.wav"></audio>
+        </div>
+        <div class="samples-row">
+          <div class="sample-box"><span class="sb-label">Sample A</span><audio controls src="../examples/c_087/c_sA_087.wav"></audio></div>
+          <div class="sample-box"><span class="sb-label">Sample B</span><audio controls src="../examples/c_087/c_sB_087.wav"></audio></div>
+        </div>
+        <div class="attr-grid">
+          <span class="attr-name">Melody</span><div class="attr-pills"><span class="pill win-neither">Neither &#183; 80.0%</span></div>
+          <span class="attr-name">Harmony</span><div class="attr-pills"><span class="pill win-neither">Neither &#183; 60.0%</span></div>
+          <span class="attr-name">Rhythm</span><div class="attr-pills"><span class="pill win-neither">Neither &#183; 60.0%</span></div>
+          <span class="attr-name">Voice</span><div class="attr-pills"><span class="pill win-na">N/A</span></div>
+          <span class="attr-name">Timbre</span><div class="attr-pills"><span class="pill win-b">B &#183; 100.0%</span></div>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-card-head">
+          <span class="case-id">c_256</span>
+          <span class="case-overall">Overall agreement: <strong>60.0%</strong> (&kappa; = &#8722;0.1364)</span>
+        </div>
+        <div class="reference-container">
+          <span class="rc-label">Reference</span>
+          <audio controls src="../examples/c_256/c_ref_256.wav"></audio>
+        </div>
+        <div class="samples-row">
+          <div class="sample-box"><span class="sb-label">Sample A</span><audio controls src="../examples/c_256/c_sA_256.wav"></audio></div>
+          <div class="sample-box"><span class="sb-label">Sample B</span><audio controls src="../examples/c_256/c_sB_256.wav"></audio></div>
+        </div>
+        <div class="attr-grid">
+          <span class="attr-name">Melody</span><div class="attr-pills"><span class="pill win-neither">Neither &#183; 60.0%</span></div>
+          <span class="attr-name">Harmony</span><div class="attr-pills"><span class="pill win-tie">Tie A/B</span></div>
+          <span class="attr-name">Rhythm</span><div class="attr-pills"><span class="pill win-a">A &#183; 60.0%</span></div>
+          <span class="attr-name">Voice</span><div class="attr-pills"><span class="pill win-na">N/A</span></div>
+          <span class="attr-name">Timbre</span><div class="attr-pills"><span class="pill win-tie">Tie A/B</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AM -->
+    <div class="tab-panel" id="panel-am">
+      <div class="case-card">
+        <div class="case-card-head">
+          <span class="case-id">c_283</span>
+          <span class="case-overall">Overall agreement: <strong>80.0%</strong> (&kappa; = 0.2857)</span>
+        </div>
+        <div class="reference-container">
+          <span class="rc-label">Reference</span>
+          <audio controls src="../examples/c_283/c_ref_283.wav"></audio>
+        </div>
+        <div class="samples-row">
+          <div class="sample-box"><span class="sb-label">Sample A</span><audio controls src="../examples/c_283/c_sA_283.wav"></audio></div>
+          <div class="sample-box"><span class="sb-label">Sample B</span><audio controls src="../examples/c_283/c_sB_283.wav"></audio></div>
+        </div>
+        <div class="attr-grid">
+          <span class="attr-name">Melody</span><div class="attr-pills"><span class="pill win-neither">Neither &#183; 100.0%</span></div>
+          <span class="attr-name">Harmony</span><div class="attr-pills"><span class="pill win-a">A &#183; 66.7%</span></div>
+          <span class="attr-name">Rhythm</span><div class="attr-pills"><span class="pill win-a">A &#183; 100.0%</span></div>
+          <span class="attr-name">Voice</span><div class="attr-pills"><span class="pill win-neither">Neither &#183; 66.7%</span></div>
+          <span class="attr-name">Timbre</span><div class="attr-pills"><span class="pill win-a">A &#183; 66.7%</span></div>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-card-head">
+          <span class="case-id">c_298</span>
+          <span class="case-overall">Overall agreement: <strong>93.3%</strong> (&kappa; = 0.7321)</span>
+        </div>
+        <div class="reference-container">
+          <span class="rc-label">Reference</span>
+          <audio controls src="../examples/c_298/c_ref_298.wav"></audio>
+        </div>
+        <div class="samples-row">
+          <div class="sample-box"><span class="sb-label">Sample A</span><audio controls src="../../examples/c_298/c_sA_298.wav"></audio></div>
+          <div class="sample-box"><span class="sb-label">Sample B</span><audio controls src="../../examples/c_298/c_sB_298.wav"></audio></div>
+        </div>
+        <div class="attr-grid">
+          <span class="attr-name">Melody</span><div class="attr-pills"><span class="pill win-b">B &#183; 100.0%</span></div>
+          <span class="attr-name">Harmony</span><div class="attr-pills"><span class="pill win-b">B &#183; 100.0%</span></div>
+          <span class="attr-name">Rhythm</span><div class="attr-pills"><span class="pill win-a">A &#183; 66.7%</span></div>
+          <span class="attr-name">Voice</span><div class="attr-pills"><span class="pill win-a">A &#183; 100.0%</span></div>
+          <span class="attr-name">Timbre</span><div class="attr-pills"><span class="pill win-a">A &#183; 100.0%</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="alt" id="materials">
+  <div class="wrap-wide">
+    <h2 class="section-title">Materials</h2>
+    <ul class="materials-list">
+      <li>
+        <div><span class="m-name">Cases metadata</span><span class="m-desc">Raw metadata for all 300 cases: source, title, authors, timestamps, triplet composition.</span></div>
+        <a class="tag tag-available" href="https://github.com/roserbatlleroca/matcha/blob/main/metadata/raw_cases.csv">CSV</a>
+      </li>
+      <li>
+        <div><span class="m-name">Individual annotations</span><span class="m-desc">All 1105 annotations in the dataset.</span></div>
+        <a class="tag tag-available" href="https://github.com/roserbatlleroca/matcha/blob/main/annotations/annotations_individual.csv">CSV</a>
+      </li>
+      <li>
+        <div><span class="m-name">Aggregated annotations per case</span><span class="m-desc">Summary decision per case, including inter-rater agreement and Fleiss' &kappa;.</span></div>
+        <a class="tag tag-available" href="https://github.com/roserbatlleroca/matcha/blob/main/annotations/annotations_per_case.csv">CSV</a>
+      </li>
+      <li>
+        <div><span class="m-name">Tied cases</span><span class="m-desc">Cases with no winning option among the response counts.</span></div>
+        <a class="tag tag-available" href="https://github.com/roserbatlleroca/matcha/blob/main/annotations/disagreement_cases.txt">TXT</a>
+      </li>
+      <li>
+        <div><span class="m-name">Aggregated decision scores</span><span class="m-desc">Per-case preference scores for A, B, or Neither.</span></div>
+        <a class="tag tag-available" href="https://github.com/roserbatlleroca/matcha/blob/main/annotations/decisions_individual.csv">CSV</a>
+      </li>
+      <li>
+        <div><span class="m-name">Participant demographics</span><span class="m-desc">Age, gender, location, music level and music role, for the 83 eligible participants.</span></div>
+        <a class="tag tag-available" href="https://github.com/roserbatlleroca/matcha/tree/main/annotations/participants_demographics">Folder</a>
+      </li>
+      <li>
+        <div><span class="m-name">Datasheet</span><span class="m-desc">Full dataset documentation, following the Datasheets for Datasets template.</span></div>
+        <a class="tag tag-available" href="https://github.com/roserbatlleroca/matcha/blob/main/metadata/MATCHA_datasheet.md">MD</a>
+      </li>
+      <li>
+        <div><span class="m-name">MiRA evaluation</span><span class="m-desc">Raw results from evaluation with the MiRA tool.</span></div>
+        <a class="tag tag-available" href="https://github.com/roserbatlleroca/matcha/tree/main/mira_eval">Folder</a>
+      </li>
+      <li>
+        <div><span class="m-name">Full MATCHA dataset</span><span class="m-desc">Metadata, annotations and audio samples, hosted on Zenodo. Restricted to research use, managed by MTG-UPF.</span></div>
+        <span class="tag tag-pending">Pending</span>
+      </li>
+      <li>
+        <div><span class="m-name">AI-SAO subset</span><span class="m-desc">120 samples generated with Stable Audio Open, released under CC-BY-NC.</span></div>
+        <span class="tag tag-pending">Pending</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="citation">
+  <div class="wrap-text">
+    <h2 class="section-title">Citation</h2>
+    <p style="color:var(--muted); margin-top:-14px; margin-bottom:20px; font-size:0.92rem;">The paper is currently under review. The entry below refers to the arXiv preprint and will be updated with final venue details on acceptance.</p>
+    <div class="citation-block">@article{batlleroca2026matcha,
+  title   = {On the Human and Computer Alignment of Attribute-Based Music Matches},
+  author  = {Batlle-Roca, Roser and Choi, Woosung and Serr\`a, Joan and
+             Morreale, Fabio and Liao, Wei-Hsiang and Serra, Xavier and
+             G\'omez, Emilia and Mitsufuji, Yuki},
+  year    = {2026},
+}</div>
+  </div>
+</section>
+
+<footer>
+  <p>Music Technology Group, Universitat Pompeu Fabra</p>
+  <p>Questions about the dataset? <a href="mailto:roser.batlle@upf.edu">roser.batlle@upf.edu</a></p>
+</footer>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+      document.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
