@@ -9,9 +9,10 @@ Documented in accordance with the *Datasheets for Datasets* framework ([Gebru et
 ### For what purpose was the dataset created?
 The MATCHA dataset was created to support the evaluation of attribute-level musical similarity and assess the alignment between human perception and computational similarity metrics in the context of music replication assessment (e.g., AI-generated music, cover songs, plagiarism). It addresses the gap where human judgments across distinct musical attributes (melody, harmony, rhythm, voice, timbre) remain underexplored.
 
-### {Who created this dataset (e.g., which team, research group) and on behalf of which entity (e.g., company, institution, organization)?
+### Who created this dataset?
+MATCHA was created by Roser Batlle-Roca<sup>1</sup>, Woosung Choi<sup>2</sup>, Joan Serrà<sup>2</sup>, Fabio Morreale<sup>2</sup>, Wei-Hsiang Liao<sup>2</sup>, Xavier Serra<sup>1</sup>, Emilia Gómez<sup>1,3</sup>, and Yuki Mitsufuji<sup>2,4</sup>
 
-This dataset was created by the Music Technology Group from Universitat Pompeu Fabra (MTG-UPF), in collaboration with Sony AI. 
+(1) Music Technology Group, Universitat Pompeu Fabra (MTG-UPF); (2) Sony AI; (3) Joint Research Centre, European Commission; (4) Sony Group Corporation
 
 ### Who funded the creation of the dataset?
 This dataset was developed under [the TRAMUCA project](https://www.upf.edu/web/mtg/ongoing-projects/-/asset_publisher/DneGVrJZ7tmE/content/transparency-in-music-creation-algorithms/maximized), a joint collaboration between the Music Technology Group (Universitat Pompeu Fabra), Sony AI and the European Commission's Joint Research Centre. 
@@ -165,7 +166,7 @@ None.
 Yes, it was used to analyze human inter-annotator agreement across musical attributes and to evaluate the alignment of computational similarity metrics in the MiRA framework (CoverID, KL divergence, CLAP, Discogs-EffNet) against human perception.
 
 ### Is there a repository that links to any or all papers or systems that use the dataset?
-Yes, a specific section will be included in the [main repository](https://github.com/roserbatlleroca/matcha).
+Yes: [https://github.com/roserbatlleroca/matcha](https://github.com/roserbatlleroca/matcha)
 
 ### What (other) tasks could the dataset be used for?
 Benchmarking MIR similarity algorithms, evaluating generative music models, training attribute-specific similarity models, and conducting music perception research.
