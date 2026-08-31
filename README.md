@@ -32,7 +32,7 @@ MATCHA (Musical Attribute-based Triplet Comparison with Human Annotations) compr
 
 *Stimuli distribution across reference sources, by origin, section, source name, number of cases, number of cases containing vocals, and overall percentage.*
 
-Listen to some stimuli examples [here](https://roserbatlleroca.github.io/matcha/index.html#examples)! 
+Listen to stimuli examples [here](https://roserbatlleroca.github.io/matcha/index.html#examples)! 
 
 ## Materials
 
