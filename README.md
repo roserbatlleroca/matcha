@@ -2,14 +2,14 @@
 
 # MATCHA: Music Attribute-based Triplet Comparison with Human Annotations
 
-**Roser Batlle-Roca**<sup>1</sup>, **Woosung Choi**<sup>2</sup>, **Joan Serrà**<sup>2</sup>, **Fabio Morreale**<sup>2</sup>, **Wei-Hsiang Liao**<sup>2</sup>, **Xavier Serra**<sup>1</sup>, **Emilia Gómez**<sup>1,3</sup>, **Yuki Mitsufuji**<sup>2,4</sup>
+**Roser Batlle-Roca**<sup>1</sup>, **Woosung Choi**<sup>2</sup>, **Joan Serrà**<sup>2</sup>, **Fabio Morreale**<sup>2</sup>, **Wei-Hsiang Liao**<sup>2</sup>,
+**Xavier Serra**<sup>1</sup>, **Emilia Gómez**<sup>1,3</sup>, **Yuki Mitsufuji**<sup>2,4</sup>
 
-<sup>1</sup>Music Technology Group, Universitat Pompeu Fabra  ·  
-<sup>2</sup>Sony AI ·  <sup>3</sup>Joint Research Centre, European Commission  ·  
+<sup>1</sup>Music Technology Group, Universitat Pompeu Fabra · <sup>2</sup>Sony AI · <sup>3</sup>Joint Research Centre, European Commission ·
 <sup>4</sup>Sony Group Corporation
 
 
-This repository is complementary to the paper *On the Human and Computer Aligment of Attribute-Based Music Matches*, currently under-review. It contains main documentation of the MATCHA dataset, as well as complemetary results of the perceptual experiment conducted in this study. We plan to provide additional materials upon paper acceptance. 
+This repository is complementary to the paper *On the Human and Computer Aligment of Attribute-Based Music Matches*, currently under-review. It contains main documentation of the MATCHA dataset, as well as complemetary results of the perceptual experiment conducted in this study. Additional materials will be provided upon paper acceptance. 
 
 [![Website](https://img.shields.io/badge/Website-MATCHA-003366?style=flat&logo=googlechrome&logoColor=white)](https://roserbatlleroca.github.io/matcha/index.html) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 <!-- [![arXiv](https://img.shields.io/badge/arXiv-260X.XXXXX-B31B1B.svg)](https://arxiv.org/abs/YOUR_ARXIV_ID) -->
