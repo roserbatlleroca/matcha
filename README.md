@@ -10,7 +10,7 @@
 <sup>4</sup>Sony Group Corporation
 
 
-This repository is complementary to the paper *On the Human and Computer Aligment of Attribute-Based Music Matches*, currently under-review. It contains main documentation of the MATCHA dataset, as well as complemetary results of the perceptual experiment conducted in this study. 
+This repository is complementary to the paper *On the Human and Computer Aligment of Attribute-Based Music Matches*, currently under-review. It contains main documentation of the MATCHA dataset, as well as complemetary results of the perceptual experiment conducted in this study. Additional materials will be provided upon acceptance. 
 
 [![Website](https://img.shields.io/badge/Website-MATCHA-003366?style=flat&logo=googlechrome&logoColor=white)](https://roserbatlleroca.github.io/matcha/index.html) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![arXiv](https://img.shields.io/badge/arXiv-2609.00987-B31B1B.svg)](https://arxiv.org/abs/2609.00987)
