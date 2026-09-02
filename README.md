@@ -10,10 +10,10 @@
 <sup>4</sup>Sony Group Corporation
 
 
-This repository is complementary to the paper *On the Human and Computer Aligment of Attribute-Based Music Matches*, currently under-review. It contains main documentation of the MATCHA dataset, as well as complemetary results of the perceptual experiment conducted in this study. Additional materials will be provided upon paper acceptance. 
+This repository is complementary to the paper *On the Human and Computer Aligment of Attribute-Based Music Matches*, currently under-review. It contains main documentation of the MATCHA dataset, as well as complemetary results of the perceptual experiment conducted in this study. 
 
 [![Website](https://img.shields.io/badge/Website-MATCHA-003366?style=flat&logo=googlechrome&logoColor=white)](https://roserbatlleroca.github.io/matcha/index.html) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-<!-- [![arXiv](https://img.shields.io/badge/arXiv-260X.XXXXX-B31B1B.svg)](https://arxiv.org/abs/YOUR_ARXIV_ID) -->
+[![arXiv](https://img.shields.io/badge/arXiv-2609.00987-B31B1B.svg)](https://arxiv.org/abs/2609.00987)
 
 </div>
 
@@ -51,7 +51,11 @@ If you find MATCHA or its repository useful in your research, please cite our pa
 
 ```
 @article{batlleroca2026matcha,
-  title   = {On the Human and Computer Alignment of Attribute-Based Music Matches},
-  author  = {Batlle-Roca, Roser and Choi, Woosung and Serr\`a, Joan and Morreale, Fabio and Liao, Wei-Hsiang and Serra, Xavier and G\'omez, Emilia and Mitsufuji, Yuki},
-  year    = {2026}
+    title   = {On the Human and Computer Alignment of Attribute-Based Music Matches},
+    author  = {Batlle-Roca, Roser and Choi, Woosung and Serr\`a, Joan and Morreale, Fabio and Liao, Wei-Hsiang and Serra, Xavier and G\'omez, Emilia and Mitsufuji, Yuki},
+    year    = {2026}, 
+    eprint={2609.00987},
+    archivePrefix={arXiv},
+    primaryClass={cs.SD},
+    url={https://arxiv.org/abs/2609.00987},
 ```
